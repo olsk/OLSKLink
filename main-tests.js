@@ -34,3 +34,38 @@ describe('OLSKLinkRelativeURL', function test_OLSKLinkRelativeURL() {
 	});
 
 });
+
+describe('OLSKLinkCompareURL', function test_OLSKLinkCompareURL() {
+
+	it('throws if not string', function () {
+		throws(function () {
+			mod.OLSKLinkCompareURL(null);
+		}, /EASErrorInputNotValid/);
+	});
+
+	it('returns input', function () {
+		const item = Math.random().toString();
+		deepEqual(mod.OLSKLinkCompareURL(item), item);
+	});
+
+	it('lowers case', function () {
+		const item = Math.random().toString();
+		deepEqual(mod.OLSKLinkCompareURL(item + 'ALFA'), item + 'alfa');
+	});
+
+	it('replaces protocol', function () {
+		const item = Math.random().toString();
+		deepEqual(mod.OLSKLinkCompareURL(uRandomElement('http', 'https') + item), 'http' + item);
+	});
+
+	it('replaces www.', function () {
+		const item = Math.random().toString();
+		deepEqual(mod.OLSKLinkCompareURL('www.' + item), item);
+	});
+
+	it('replaces trailing slash', function () {
+		const item = Math.random().toString();
+		deepEqual(mod.OLSKLinkCompareURL(item + '/'), item);
+	});
+
+});
