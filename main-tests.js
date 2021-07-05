@@ -7,13 +7,13 @@ describe('OLSKLinkRelativeURL', function test_OLSKLinkRelativeURL() {
 	it('throws if param1 not string', function () {
 		throws(function () {
 			mod.OLSKLinkRelativeURL(null, Math.random().toString());
-		}, /EASErrorInputNotValid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('throws if param2 not string', function () {
 		throws(function () {
 			mod.OLSKLinkRelativeURL(Math.random().toString(), null);
-		}, /EASErrorInputNotValid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('returns string', function () {
@@ -40,7 +40,7 @@ describe('OLSKLinkCompareURL', function test_OLSKLinkCompareURL() {
 	it('throws if not string', function () {
 		throws(function () {
 			mod.OLSKLinkCompareURL(null);
-		}, /EASErrorInputNotValid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('returns input', function () {
