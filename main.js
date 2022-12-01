@@ -20,6 +20,20 @@ const mod = {
 		return inputData.toLowerCase().replace(/^https/, 'http').replace('www.', '').replace(/\/$/, '');
 	},
 
+	OLSKLinkValid (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		try {
+			if (new URL('', inputData).hostname) {
+				return true;
+			}
+		} catch (err) {
+			return false;
+		}
+	},
+
 };
 
 Object.assign(exports, mod);

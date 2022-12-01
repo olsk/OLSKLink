@@ -69,3 +69,25 @@ describe('OLSKLinkCompareURL', function test_OLSKLinkCompareURL() {
 	});
 
 });
+
+describe('OLSKLinkValid', function test_OLSKLinkValid() {
+
+	it('throws if not string', function () {
+		throws(function () {
+			mod.OLSKLinkValid(null);
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns false if no protocol', function () {
+		deepEqual(mod.OLSKLinkValid('example.com'), false);
+	});
+
+	it('returns false if no host', function () {
+		deepEqual(mod.OLSKLinkValid('https://'), false);
+	});
+
+	it('returns true', function () {
+		deepEqual(mod.OLSKLinkValid('http' + uRandomElement('s', '') + '://example.com'), true);
+	});
+
+});
