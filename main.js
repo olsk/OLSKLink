@@ -34,6 +34,41 @@ const mod = {
 		}
 	},
 
+	OLSKEmailValid (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		if (!inputData.match('@')) {
+			return '';
+		}
+
+		if (!inputData.split('@').shift().trim()) {
+			return '';
+		}
+
+		if (!inputData.split('@').pop().match(/\./)) {
+			return '';
+		}
+
+		if (inputData.split('@').pop().split('.').pop().trim().length < 2) {
+			return '';
+		}
+
+		if (!inputData.split('@').pop().split('.').shift().trim()) {
+			return '';
+		}
+
+		if (inputData.trim().match(/\s/)) {
+			return '';
+		}
+
+		return inputData.trim();
+	},
+
 };
+
+export default mod;
+
 
 Object.assign(exports, mod);

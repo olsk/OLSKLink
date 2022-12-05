@@ -91,3 +91,54 @@ describe('OLSKLinkValid', function test_OLSKLinkValid() {
 	});
 
 });
+
+describe('OLSKEmailValid', function test_OLSKEmailValid() {
+
+	it('throws if not string', function() {
+		throws(function() {
+			mod.OLSKEmailValid(null);
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		deepEqual(mod.OLSKEmailValid(''), '');
+	});
+
+	it('ignores if missing @', function() {
+		deepEqual(mod.OLSKEmailValid('alfabravo.charlie'), '');
+	});
+
+	it('ignores if username blank', function() {
+		deepEqual(mod.OLSKEmailValid('@bravo.charlie'), '');
+	});
+
+	it('ignores if missing tld', function() {
+		deepEqual(mod.OLSKEmailValid('alfa@bravo'), '');
+	});
+
+	it('ignores if missing tld and username has dot', function() {
+		deepEqual(mod.OLSKEmailValid('alfa.bravo@charlie'), '');
+	});
+
+	it('ignores if tld blank', function() {
+		deepEqual(mod.OLSKEmailValid('alfa@bravo.'), '');
+	});
+
+	it('ignores if tld less than two letters', function() {
+		deepEqual(mod.OLSKEmailValid('alfa@bravo.a'), '');
+	});
+
+	it('ignores if host blank', function() {
+		deepEqual(mod.OLSKEmailValid('alfa@.bravo'), '');
+	});
+
+	it('ignores if contains whitespace', function() {
+		deepEqual(mod.OLSKEmailValid('alf a@bravo.charlie'), '');
+	});
+
+	it('strips whitespace', function() {
+		deepEqual(mod.OLSKEmailValid(' alfa@bravo.charlie '), 'alfa@bravo.charlie');
+	});
+
+});
+
